@@ -14,6 +14,11 @@ export default function execute(options, cb) {
     renderLatencyTable,
     renderResultsTable
   } = options
+  let finalHeaders = {}
+  try {
+    finalHeaders = JSON.parse(headers)
+  } catch (error) {
+  }
 
   const instance = autocannon(
     {
@@ -23,7 +28,7 @@ export default function execute(options, cb) {
       duration,
       timeout,
       title,
-      headers,
+      headers: finalHeaders,
       body
     },
     cb
